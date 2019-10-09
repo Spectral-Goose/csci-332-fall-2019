@@ -1,0 +1,103 @@
+<!--
+    LAB 5
+    Make ethernet
+    initial cable near plug
+    google color code?
+    create LAN with routers and 2 computers
+    install samba to share files
+
+    div - block
+    span - inline
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>10-9 Inclass</title>
+    <link rel="stylesheet" href="menustyle-10-9.css">
+    <style>
+        table, th {
+            border: solid 1px black;
+            border-collapse: collapse;
+        }
+
+        table, tr, td {
+            border: solid 1px black;
+            border-collapse: collapse;
+        }
+
+        table#special tr:nth-child(even) {
+            background-color: #bbe1e7;
+        }
+
+        table#special tr:nth-child(odd) {
+            background-color: #e0e0e0;
+        }
+
+        table#special th {
+            color: white;
+            background-color: black;
+        }
+
+        #relocate {
+            position: absolute;
+            left: 300px;
+            top: 200px;
+        }
+
+    </style>
+</head>
+<body>
+    <table id="special">
+        <th>Column 1</th>
+        <th>Column 2</th>
+        <th>Column 3</th>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+        </tr>
+    </table>
+    <br /><hr /><br />
+    <ul>
+        <li class=menu1>Menu 1
+            <ul>
+                <li>Submenu 1</li>
+                <li>Submenu 2</li>
+                <li>Submenu 3</li>
+            </ul>
+        </li>    
+        <li class=menu2>Menu 2
+            <ul>
+                <li>Submenu 1</li>
+                <li>Submenu 2</li>
+                <li>Submenu 3</li>
+            </ul>
+        </li>    
+        <li class=menu3>Menu 3
+            <ul>
+                <li>Submenu 1</li>
+                <li>Submenu 2</li>
+                <li>Submenu 3</li>
+            </ul>
+        </li>    
+    </ul>
+
+    <div id="relocate">
+        This is a division.
+    </div>
+</body>
+</html>
