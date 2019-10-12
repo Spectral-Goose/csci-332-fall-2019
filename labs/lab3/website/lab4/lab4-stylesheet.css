@@ -1,0 +1,103 @@
+ul {
+	display: inline;
+	background-color: #d0d0d0;
+	padding: 20px 0px;
+	font-size: 20px;	
+}
+
+li {
+	display: inline;
+	background-color: #d0d0d0;
+	padding: 20px 20px;
+}
+
+ul li ul {
+	display: none;
+}
+
+li:hover {
+	background-color: #b8b8b8;
+}
+
+li.menu1:hover ul {
+	display: block;
+	width: 120px;
+	position: absolute;
+	top: 288px;
+	left: 555px;
+	padding: 0px;
+}
+
+li.special {
+	display: block;
+	width: 85px;
+	padding: 15px 18px;
+	font-size: 20px;
+}
+
+a#special {
+	color: black;
+	text-decoration: none;
+}
+
+a#special:visited {
+	color: black;
+}
+
+table.special, tr.special, td.special {
+	border: solid 1px black;
+	border-collapse: collapse;
+}
+
+th.special {
+	border: solid 1px white;
+	border-collapse: collapse;
+	background-color: black;
+	color: white;
+}
+
+table.special tr:nth-child(even) {
+	background-color: #aeaeae;
+}
+
+table.special tr:nth-child(odd) {
+	background-color: #ffffff;
+}
+
+table.scores, table.scores tr, table.scores tr td {
+	border: solid 1px black;
+	border-collapse: collapse;
+	font-size: 30px;
+}
+
+td#win {
+	font-size: 50px;
+}
+
+td#lose {
+	font-size: 20px;
+}
+
+td#fl {
+	color: orange;
+}
+
+td#ky {
+	color: #000caf;
+}
+
+td#al {
+	color: crimson;
+}
+
+td#ar {
+	color: red;
+}
+
+td#sc {
+	color: #8a0101;
+}
+
+td#vn {
+	color: gold;
+}
