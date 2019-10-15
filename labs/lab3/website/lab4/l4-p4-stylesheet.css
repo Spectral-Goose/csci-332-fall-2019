@@ -43,3 +43,41 @@ a#special {
 a#special:visited {
 	color: black;
 }
+
+table.scores, table.scores tr, table.scores tr td {
+	border: solid 1px black;
+	border-collapse: collapse;
+	font-size: 30px;
+}
+
+td#win {
+	font-size: 50px;
+}
+
+td#lose {
+	font-size: 20px;
+}
+
+td#fl {
+	color: orange;
+}
+
+td#ky {
+	color: #000caf;
+}
+
+td#al {
+	color: crimson;
+}
+
+td#ar {
+	color: red;
+}
+
+td#sc {
+	color: #8a0101;
+}
+
+td#vn {
+	color: gold;
+}

@@ -43,3 +43,23 @@ a#special {
 a#special:visited {
 	color: black;
 }
+
+table.special, tr.special, td.special {
+	border: solid 1px black;
+	border-collapse: collapse;
+}
+
+th.special {
+	border: solid 1px white;
+	border-collapse: collapse;
+	background-color: black;
+	color: white;
+}
+
+table.special tr:nth-child(even) {
+	background-color: #aeaeae;
+}
+
+table.special tr:nth-child(odd) {
+	background-color: #ffffff;
+}

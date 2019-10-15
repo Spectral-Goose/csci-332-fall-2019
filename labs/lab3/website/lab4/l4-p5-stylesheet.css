@@ -5,32 +5,32 @@ ul {
 	font-size: 20px;	
 }
 
-li {
+li#menu {
 	display: inline;
 	background-color: #d0d0d0;
 	padding: 20px 20px;
 }
 
-ul li ul {
+ul li#menu ul {
 	display: none;
 }
 
-li:hover {
+li#menu:hover {
 	background-color: #b8b8b8;
 }
 
-li.menu1:hover ul {
+li#menu.menu1:hover ul {
 	display: block;
 	width: 120px;
 	position: absolute;
 	top: 288px;
-	left: 555px;
+	left: 547px;
 	padding: 0px;
 }
 
-li.special {
+li#menu.special {
 	display: block;
-	width: 85px;
+	width: 84px;
 	padding: 15px 18px;
 	font-size: 20px;
 }
@@ -42,4 +42,28 @@ a#special {
 
 a#special:visited {
 	color: black;
+}
+
+ol#outer {
+	list-style: upper-roman;
+}
+
+ol#mid {
+	list-style: upper-alpha;
+}
+
+ol#inner {
+	list-style: armenian;
+}
+
+li#compact {
+	background-color: pink;
+}
+
+li#midsize {
+	background-color: blue;
+}
+
+li#sports {
+	background-color: red;
 }
