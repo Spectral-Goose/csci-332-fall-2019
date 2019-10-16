@@ -15,6 +15,9 @@
         $y = "String: ";
         $z = "This is another string";
         echo $y . $z;
+        $a = 2;
+        echo "<br />";
+        echo $a * $x;
     ?>
 </body>
 </html>

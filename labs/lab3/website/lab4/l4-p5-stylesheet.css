@@ -52,10 +52,6 @@ ol#mid {
 	list-style: upper-alpha;
 }
 
-ol#inner {
-	list-style: armenian;
-}
-
 li#compact {
 	background-color: pink;
 }
