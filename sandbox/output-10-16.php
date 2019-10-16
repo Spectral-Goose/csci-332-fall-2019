@@ -7,9 +7,23 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="output-10-16.php" method="post">
-        Name: <input type="text" name="" id="">
+    <?php
+        /*$name = $_POST['User_Name'];
+        $password = $_POST['User_Password'];
 
-    </form>
+        echo "Welcome " . $name . "<br />";
+        echo "I have stolen your password. Your password is " . $password . "<br />";*/
+
+        /*$apple = $_POST['Apple'];
+        $price = $_POST['Price'];
+
+        echo "The total price for " . $apple > " aplles is $" . $apple * $price . "<br />";*/
+
+        $weight = $_POST['weight'];
+        $height = $_POST['height'];
+        $BMI = $weight * 703 / ($height * $height);
+
+        echo "Your BMI is " . $BMI . "<br />";
+    ?>
 </body>
 </html>
