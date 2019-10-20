@@ -1,0 +1,45 @@
+ul {
+	display: inline;
+	background-color: #d0d0d0;
+	padding: 20px 0px;
+	font-size: 20px;	
+}
+
+li#menu {
+	display: inline;
+	background-color: #d0d0d0;
+	padding: 20px 20px;
+}
+
+ul li#menu ul {
+	display: none;
+}
+
+li#menu:hover {
+	background-color: #b8b8b8;
+}
+
+li#menu.menu1:hover ul {
+	display: block;
+	width: 120px;
+	position: absolute;
+	top: 288px;
+	left: 547px;
+	padding: 0px;
+}
+
+li#menu.special {
+	display: block;
+	width: 84px;
+	padding: 15px 18px;
+	font-size: 20px;
+}
+
+a#special {
+	color: black;
+	text-decoration: none;
+}
+
+a#special:visited {
+	color: black;
+}
