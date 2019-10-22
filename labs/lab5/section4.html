@@ -8,12 +8,76 @@
     <title>Section 4</title>
 </head>
 <body>
+    <h1>Section 4</h1>
+    <ul>
+        <a id="special" href="index.html"><li id="menu">Home</li></a>
+        <li id="menu" class=menu1>Problems
+            <ul>
+                <a id="special" href="section1.html"><li id="menu" class=special>Section 1</li></a>
+                <a id="special" href="section2.html"><li id="menu" class=special>Section 2</li></a>
+                <a id="special" href="section3.html"><li id="menu" class=special>Section 3</li></a>
+                <a id="special" href="section4.html"><li id="menu" class=special>Section 4</li></a>
+            </ul>
+        </li>
+    </ul><br /><br />
     <ol>
         <li>
-            
+            <ol style="list-style-type: lower-alpha;">
+                <li>Plug the router into the wall.</li>
+                <li>Reset the router by pressing and holding the reset button 
+                    on the back for 10 seconds.</li>
+                <li>Connect the router and one of the computers using an 
+                    ethernet cable.</li>
+                
+            </ol>
         </li>
-        <li></li>
-        <li></li>
+        <li>
+            <ol style="list-style-type: lower-alpha;">
+                <li>Find the IP of your router by clicking the top right option 
+                    bar -> Wired Connected -> Wired Settings -> the gear under 
+                    the Wired section. The IP is the Default Route. Copy the 
+                    IP.</li>
+                <li>Paste the IP into the url to pull up the configuration 
+                    page.</li>
+                <li>Traverse to the setup tab and the Network Setup section of 
+                    that tab. Under Router IP, change the Local IP Address to 
+                    the desired group IP.</li>
+                <li>Click Apply Settings. Since your router's IP has been 
+                    changed, reset your computer to reset the router IP. Enter 
+                    the new IP into the url field and return to the setup 
+                    tab.</li>
+                <li>Change the Start IP Address to the desired start IP. Change 
+                    Maximum DHCP Users to the desired number. Click Apply 
+                    Settings.</li>
+                <li>To ensure setup has been done properly, open the terminal 
+                    and type <br /> $ ifconfig <br /> and ensure the IP in the 
+                    enp2s0 section is in the range you specified. If it is, you 
+                    are done!</li>
+                </li>
+            </ol>
+        <li>
+            <table>
+                <tr>
+                    <td>Start</td>
+                    <td><a href=""><img></a></td>
+                </tr>
+                <tr>
+                    <td>2 Minutes</td>
+                </tr>
+                <tr>
+                    <td>4 Minutes</td>
+                </tr>
+                <tr>
+                    <td>6 Minutes</td>
+                </tr>
+                <tr>
+                    <td>8 Minutes</td>
+                </tr>
+                <tr>
+                    <td>End</td>
+                </tr>
+            </table>
+        </li>
         <li></li>
     </ol>
 </body>
