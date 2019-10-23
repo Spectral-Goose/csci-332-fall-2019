@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="l5-stylesheet.css">
+    <title>Section 4</title>
+</head>
+<body>
+    <h1>Section 4: Constructing a LAN Using One Switch</h1>
+    <ul>
+        <a id="special" href="index.html"><li id="menu">Home</li></a>
+        <li id="menu" class=menu1>Problems
+            <ul>
+                <a id="special" href="section1.html"><li id="menu" class=special>Section 1</li></a>
+                <a id="special" href="section2.html"><li id="menu" class=special>Section 2</li></a>
+                <a id="special" href="section3.html"><li id="menu" class=special>Section 3</li></a>
+                <a id="special" href="section4.html"><li id="menu" class=special>Section 4</li></a>
+                <a id="special" href="section5.html"><li id="menu" class=special>Section 5</li></a>
+                <a id="special" href="section6.html"><li id="menu" class=special>Section 6</li></a>            
+            </ul>
+        </li>
+    </ul><br /><br />
+    <ol>
+        <li>
+            <ol style="list-style-type: lower-alpha;">
+                <li>Plug the switch into the wall.</li>
+                <li>Reset the switch by pressing and holding the reset button 
+                    on the back for 10 seconds.</li>
+                <li>Connect the switch and one of the computers using an 
+                    ethernet cable. Connect the ethernet port on your computer to 
+                    any of the ethernet ports on the switch.</li>
+                <a href="images/1s-resetting.jpg"><img width=200px; src="images/1s-resetting.jpg" /></a>
+                <a href="images/1s-overview.jpg"><img width=200px; src="images/1s-overview.jpg" /></a>
+                <a href="images/1s-my-port.jpg"><img width=200px; src="images/1s-my-port.jpg" /></a>
+                <a href="images/1s-switch-ports.jpg"><img width=200px; src="images/1s-switch-ports.jpg" /></a>
+                <a href="images/1s-brians-port.jpg"><img width=200px; src="images/1s-brians-port.jpg" /></a>
+            </ol>
+        </li>
+        <li>
+            <ol style="list-style-type: lower-alpha;">
+                <li>Find the IP of your switch by clicking the top right option 
+                    bar -> Wired Connected -> Wired Settings -> the gear under 
+                    the Wired section. The IP is the Default Route. Copy the 
+                    IP.</li>
+                <li>Paste the IP into the url to pull up the configuration 
+                    page.</li>
+                <li>Traverse to the setup tab and the Network Setup section of 
+                    that tab. Under Router IP, change the Local IP Address to 
+                    the desired group IP.</li>
+                <li>Click Apply Settings. Since your switch's IP has been 
+                    changed, reset your computer to reset the switch IP. Enter 
+                    the new IP into the url field and return to the setup 
+                    tab.</li>
+                <li>Change the Start IP Address to the desired start IP. Change 
+                    Maximum DHCP Users to the desired number. Click Apply 
+                    Settings.<a href="images/router1 config.png"><img width=200px; src="images/router1 config.png" /></a></li>
+                <li>To ensure setup has been done properly, open the terminal 
+                    and type <br /> $ ifconfig <br /> and ensure the IP in the 
+                    enp2s0 section is in the range you specified. If it is, you 
+                    are done!<a href="images/1s-my-ip.png"><img width=200px; src="images/1s-my-ip.png" /></a></li>
+                <li>IP Range: 192.168.101.0 to 192.168.101.253</li>
+                <li>Subnet Mask: 255.255.255.0</li>
+            </ol>
+        </li>
+        <li>
+            <table>
+                <tr>
+                    <td>Trial</td>
+                    <td>Taylor's Screenshots</td>
+                    <td>Brian's Screenshots</td>
+                </tr>
+                <tr>
+                    <td>1 Switch LAN</td>
+                    <td><a href="images/my-s1.jpg"><img src="images/my-s1.jpg; width:200px"></a></td>
+                    <td><a href="images/brians-s1.jpg"><img src="images/brians-s1.jpg; width:200px"></a></td>
+                </tr>
+            </table>
+        </li> <br/>
+        <li>
+            <table>
+                <tr>
+                    <td>Time</td>
+                    <td>Reciever Screenshot</td>
+                    <td>Sender Screenshot</td>
+                </tr>
+                <tr>
+                    <td>Start</td>
+                    <td><a href="images/1switch/1s-r-start.png"><img src="images/1switch/1s-r-start.png; width:200px"></a></td>
+                    <td><a href="images/1s/1s-s1.png"><img src="images/1s/1s-s1.png; width:200px"></a></td>
+                </tr>
+                <tr>
+                    <td>2.5 Minutes</td>
+                    <td><a href="images/1switch/1s-r-2,5.png"><img src="images/1switch/1s-r-2,5.png; width:200px"></a></td>
+                    <td><a href="images/1s/1s-s2.png"><img src="images/1s/1s-s2.png; width:200px"></a></td>
+                </tr>
+                <tr>
+                    <td>5 Minutes</td>
+                    <td><a href="images/1switch/1s-r-5.png"><img src="images/1switch/1s-r-5.png; width:200px"></a></td>
+                    <td><a href="images/1s/1s-s3.png"><img src="images/1s/1s-s3.png; width:200px"></a></td>
+                </tr>
+                <tr>
+                    <td>End</td>
+                    <td><a href="images/1switch/1s-r-end.png"><img src="images/1switch/1s-r-end.png; width:200px"></a></td>
+                    <td><a href="images/1s/1s-s4.png"><img src="images/1s/1s-s4.png; width:200px"></a></td>
+                </tr>
+            </table>
+        </li>
+    </ol>
+</body>
+</html>
