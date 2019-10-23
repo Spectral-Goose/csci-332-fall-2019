@@ -23,8 +23,8 @@ li#menu.menu1:hover ul {
 	display: block;
 	width: 120px;
 	position: absolute;
-	top: 288px;
-	left: 547px;
+	top: 123px;
+	left: 102px;
 	padding: 0px;
 }
 
@@ -42,4 +42,9 @@ a#special {
 
 a#special:visited {
 	color: black;
+}
+
+table, th, tr, td {
+	border: solid 1px black;
+	border-collapse: collapse;
 }
