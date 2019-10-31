@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Store</title>
+</head>
+<body>
+    <center>
+            <h1><a href="../index.html"><b>Taylor's Website</b></a></h1> <br />
+                <table style="border-spacing: 100px 0">
+                <tr>
+                <td><a href="../lab1/index.html">lab1</a></td>
+                <td><a href="../lab2/index.html">lab2</a></td>
+                <td><a href="../lab3/index.html">lab3</a></td>
+                <td><a href="../lab4/index.html">lab4</a></td>
+                <td><a href="../lab5/index.html">lab5</a></td>
+                <td><a href="../lab6/index.html">lab6</a></td>
+                <td><a href="../lab7/index.html">lab7</a></td>
+                <td><a href="../lab8/index.html">lab8</a></td>
+            </tr>
+        </table>
+        <hr />
+    </center>
+    <h1>CSCI Online Store</h1>
+    <form action="invoice.php" method="post">
+        <img src="images/desktop.jpeg" width="200px" height="130px">
+        <img src="images/laptop.jpeg" width="200px" height="130px"><br />
+        <input type="checkbox" name="electronics[]" value="Desktop"/>$1234
+        <input type="checkbox" name="electronics[]" value="Laptop" style="margin: 50px 3px 50px 150px;"/>$2345<br />
+        <img src="images/drive.jpg" width="200px" height="130px">
+        <img src="images/ram.jpg" width="200px" height="130px"><br />
+        <input type="checkbox" name="electronics[]" value="10TB Disk Drive"/>$246
+        <input type="checkbox" name="electronics[]" value="8GB RAM" style="margin: 50px 3px 50px 150px;"/>$79<br />
+        <input type="submit" name="checkout" value="Checkout">
+    </form>
+    <div style="padding-top: 20px;">
+        <a href="index.html">Lab 6 Index</a>
+    </div>
+</body>
+</html>
