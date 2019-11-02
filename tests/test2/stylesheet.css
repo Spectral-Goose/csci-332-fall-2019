@@ -1,0 +1,50 @@
+ul {
+    display: inline;
+    background-color: #909090;
+    padding: 20px 0px;
+    font-size: 20px;	
+    }
+
+    li {
+        display: inline;
+        background-color: #909090;
+         padding: 20px 20px;
+    }
+
+    ul li ul {
+        display: none;
+    }
+
+    li:hover {
+        background-color: #909090;
+    }
+
+    li.menu1:hover ul {
+        display: block;
+        width: 120px;
+        position: absolute;
+        top: 75px;
+        left: 89px;
+        padding: 0px;
+    }
+
+    li.special {
+        display: block;
+        width: 85px;
+        padding: 15px 18px;
+        font-size: 20px;
+    }
+
+    li.special:hover {
+        color: white;
+        background-color: #303030;
+    }
+
+    a#special {
+        color: blue;
+        text-decoration: none;
+    }
+
+    a#special:visited {
+        color: blue;
+    }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test 2: Problem 3</title>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+    <br /><br />
+    <ul>
+    <a id="special" href="index.html"><li>Home</li></a>
+        <li class=menu1 style="color: blue;">Solution
+            <ul>
+                <a id="special" href="problem2.html"><li class=special>Problem 2</li></a>
+                <a id="special" href="problem3.html"><li class=special>Problem 3</li></a>
+            </ul>
+        </li>
+    </ul><br /><br /><br />
+    <h1 style="color: #9e9e9e; font-size: 48pt;">MSCS Store</h1>
+    <form action="receipt.php" method="post">
+        Login: <input type="text" name="user"><br />
+        Password: <input type="password" name="pass"><br />
+        <input type="submit" value="Login">
+        <hr />
+        <h1>Shipping Method</h1>
+        <input type="radio" name="shipping" value="USPS">USPS<br />
+        <input type="radio" name="shipping" value="Fedex">Fedex<br />
+        <input type="radio" name="shipping" value="UPS">UPS<br />
+        <hr />
+        <h1>Payment:</h1><br />
+        <select name="payment">
+            <option value="VISA">VISA</option>
+            <option value="Master">Master</option>
+            <option value="Discover">Discover</option>
+            <option selected value="Debit">Debit</option>
+        </select>
+        <hr />
+        <input type="checkbox" name="part[]" value="CPU">CPU<br />
+        <input type="checkbox" name="part[]" value="Hard Drive">Hard Drive<br />
+        <input type="checkbox" name="part[]" value="Monitor">Monitor<br />
+        <input type="submit" value="Purchase"><br />
+    </form>
+</body>
+</html>
