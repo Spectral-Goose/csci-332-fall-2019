@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style type="text/css">
+		h1, b {
+			font-size: 100px;
+			color: crimson;
+		}
+
+		/* No comma means the last tag must be nested in the first */
+		h1 b {
+			font-size: 20px;
+			color: red;
+		}
+
+		/* <p class="normal"> */
+		p.normal {
+			font-size: 12px;
+		}
+
+		/* <x class="special"> */
+		.special {
+			color: blue;
+			font-size: 20px;
+		}
+
+		/* <x id="special_id"> */
+		#special_id {
+			font-size: 25px;
+			color: fuchsia;
+		}
+
+		/* <x class="special_color"> */
+		.special_color {
+			color: #00ffff;
+		}
+
+		.red_rule {
+			color: #ff0000;
+		}
+
+		.green_rule {
+			color: #00ff00;
+		}
+
+		.blue_rule {
+			color: #0000ff;
+		}
+/*
+		input:hover {
+			font-size: 30px;
+			color: red;
+		}
+*/
+		/* Cursor in test box */
+/*		input:focus {
+			font-size: 40;
+			color: green;
+		}
+*/
+		a.link {
+			color: #000000;
+		}
+
+		a:visited {
+			color: black;
+		}
+
+		a:hover {
+			color: gold;
+		}
+
+		.line_through {
+			text-decoration: line-through;
+		}
+
+		.overline {
+			text-decoration: overline;
+		}
+
+		/* h offset   v offset   color of shadow */
+		.shadow {
+			text-shadow: 10px 5px red;
+		}
+
+		li {
+			display: inline;
+		}
+
+		/* on test */
+		.tooltip {
+			display: none;
+			background-color: yellow;
+			padding: 20px;
+			width: 150px;
+			border-style: solid;
+			border-width: 1px;
+		}
+
+		div:hover .tooltip {
+			display: block;
+		}
+	</style>
+
+	<link rel="stylesheet" 
+		href="https://fonts.googleapis.com/icon?family=Material+Icons" 
+	/>
+
+</head>
+<body>
+	<form action="">
+		<div>
+			This is a tooltip example.<input type="text" />
+			<div class="tooltip">This is a hint</div>
+		</div> 
+	</form>
+	<ul>
+		<li>Item 1</li>
+		<li>Item 2</li>
+		<li>Item 3</li>
+	</ul>
+	<ul>
+		<li style="list-style-type: circle">Item 1</li>
+		<li style="list-style-type: square">Item 2</li>
+		<li style="list-style-type: none">Item 3</li>
+	</ul>
+	<ol>
+		<li style="list-style-type: lower-alpha">Item 1</li>
+		<li style="list-style-type: lower-greek">Item 2</li>
+		<li style="list-style-type: upper-latin">Item 3</li>
+	</ol>
+	<span class="material-icons">cloud</span>
+	<div class="material-icons">attachment</div>
+	<div class="material-icons">favorite</div>
+	<div class="material-icons">computer</div>
+
+	<h1>Hello World!</h1>
+	
+	<b>This is a bold tag.</b>
+	
+	<h1><b>This is a nested b tag.</b></h1>
+	
+	<p class="normal">
+		This is a normal paragraph.
+	</p>
+	
+	<p class="special">
+		This is a special paragraph.
+	</p>
+	
+	<p id="special_id">This is a special ID paragraph</p>
+	
+	<b style="font-size:55px;">This is a bold tag.</b>
+	
+	<form action="">
+		<input type="text" name="" id=""/>
+	</form>
+
+	<table style="background-color: cadetblue; font-family:Verdana, Geneva, Tahoma, sans-serif">
+		<tr>
+			<td style="font-weight: 900">1</td>
+			<td style="font-style: oblique">2</td>
+		</tr>
+		<tr>
+			<td style="font: bolder 30pt 'Verdana'">3</td>
+			<td>4</td>
+		</tr>
+	</table>
+
+	<!-- span does not do anything, it just allows classes to be used without 
+		using tags with other effects -->
+	<span class="line_through">This is a line through text.</span>
+
+	<!-- breaks from previous and next line -->
+	<div class="overline">This is an overline text.</div>
+
+	<div class="shadow">This is a shadowed line.</div>
+
+	<br />
+	<a href="10-2-problem1.html" class="link">Problem 1</a>
+</body>
+</html>
