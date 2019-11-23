@@ -49,6 +49,11 @@ int main()
 
     caster.init(2, name3, 32, 41, 450);
     players.push_back(caster);
+
+    for(auto i:players) {
+        *i.name = "newname";
+        cout << players[0].name;
+    }
 /*
     print(players);    
 
@@ -121,30 +126,38 @@ int main()
     print(players);
 */
 
-    print(players);
+    //print(players);
 
-    for(auto it:players) {
+    /*do{
         string text;
-        text = "Name: ";
-        text += it.name;
-        text += ", Role: ";
-        text += to_string(it.role);
-        text += ", Coordinates: (";
-        text += to_string(it.x);
-        text += ",";
-        text += to_string(it.y);
-        text += ")";
-        text += ", Health: ";
-        text += to_string(it.health);
-        text += "\n";
+        
+        for(auto it:players) {
+            string name;
+            int role, x, y, health;
+            cout << "Input player name: ";
+            cin >> name;
+            text = "Name: ";
+            //it.name = name;
+            text += it.name;
+            text += ", Role: ";
+            text += to_string(it.role);
+            text += ", Coordinates: (";
+            text += to_string(it.x);
+            text += ",";
+            text += to_string(it.y);
+            text += ")";
+            text += ", Health: ";
+            text += to_string(it.health);
+            text += "\n";
 
-        const char *line = text.c_str();
+            const char *line = text.c_str();
 
-        nBytes = strlen(line) + 1;
-        sendto(clientSocket, line, nBytes, 0, (struct sockaddr *)&ServerAddr, addr_size);
-    }
+            nBytes = strlen(line) + 1;
+            sendto(clientSocket, line, nBytes, 0, (struct sockaddr *)&ServerAddr, addr_size);
+        }
+    } while(strncmp(line, "Quit", strlen(line) - 1) != 0);
 
-
+*/
 /*
         string text;
 
