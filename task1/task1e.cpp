@@ -52,7 +52,7 @@ int main()
 
     for(auto i:players) {
         *i.name = "newname";
-        cout << players[0].name;
+        cout << "Name: " << players[0].name;
     }
 /*
     print(players);    
