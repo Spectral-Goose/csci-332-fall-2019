@@ -52,6 +52,8 @@ int main()
 
     print(players);
 
+        const char *line;
+    do {
     for(auto it:players) {
         string text;
         text = "Name: ";
@@ -67,11 +69,14 @@ int main()
         text += to_string(it.health);
         text += "\n";
 
-        const char *line = text.c_str();
+        line = text.c_str();
 
+        cout << "name: " << line << "\n";
         nBytes = strlen(line) + 1;
-        sendto(clientSocket, line, nBytes, 0, (struct sockaddr *)&ServerAddr, addr_size);
+                sendto(clientSocket, line, nBytes, 0, (struct sockaddr *)&ServerAddr, addr_size);
+        
     }
+    } while(strncmp(line, "Quit!", strlen(line)-1) != 0);
    return 0;
 }
 
