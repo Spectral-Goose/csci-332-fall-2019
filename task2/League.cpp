@@ -304,21 +304,26 @@ int init()
 void *receiveMessage(void *ptr) // Server Thread
 {
     // ToDo: Initialize a server socket
-    // int udpSocket;
-    // int clientAddr;
+    int udpSocket;
+    int clientAddr;
 
-    // udpSocket = socket(PF_INET, SOCK_DGRAM, 0);
-    // ServerAddr.sin_family = AF_INET;
-    // ServerAddr.sin_port = listeningPort;
-    // ServerAddr.sin_addr.s_addr = INADDR_ANY;
-    // memset(ServerAddr.sin_zero, '\0', sizeof ServerAddr.sin_zero);
-    // bind(udpSocket, (struct sockaddr *)&ServerAddr, sizeof(ServerAddr));
-    // socklen_t addr_size = sizeof clientAddr;
+    udpSocket = socket(PF_INET, SOCK_DGRAM, 0);
+    ServerAddr.sin_family = AF_INET;
+    ServerAddr.sin_port = listeningPort;
+    ServerAddr.sin_addr.s_addr = INADDR_ANY;
+    memset(ServerAddr.sin_zero, '\0', sizeof ServerAddr.sin_zero);
+    bind(udpSocket, (struct sockaddr *)&ServerAddr, sizeof(ServerAddr));
+    socklen_t addr_size = sizeof clientAddr;
 
     // ToDo: Create a loop and parse the received message
-
+    do {
+        
     //Update
     // ToDo: For Update, check if the IP is in the vector, if not add the player to the vector.
+        bool exists = false;
+        for(auto it:gamers) {
+            if(it->IP == )
+        }
     //       otherwise,
 
     //Hit
@@ -330,6 +335,7 @@ void *receiveMessage(void *ptr) // Server Thread
     // ToDo:
     // 1. Use a for loop to find the player who wants to exit the game.
     // 2. Remove it from gamers vector
+    } while(strncmp(buffer, "Quit", strlen(buffer) - 1) != 0);
 }
 
 void send_message(ActionType action)
