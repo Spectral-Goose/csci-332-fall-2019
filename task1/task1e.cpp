@@ -49,77 +49,6 @@ int main()
 
     caster.init(2, name3, 32, 41, 450);
     players.push_back(caster);
-/*
-    print(players);    
-
-    char keyword[200];    
-
-    cout << "Enter a player name to find: ";
-    cin >> keyword;
-    cout << "\n";
-
-    int count = 0;
-
-    if(keyword == "Quit!") {
-        return 0;
-    }
-
-    for(auto it:players) {
-        count++;
-        if(strcmp(it.name, keyword) == 0) {
-            int newRole, newX, newY, newHealth;
-            string line;
-
-            cout << "Enter a new Role: ";
-            cin >> line;
-            if(line == "Quit!") {
-                return 0;
-            }
-            else {
-                newRole = stoi(line);
-            }
-
-            cout << "\nEnter a new X-coordinate: ";
-            cin >> line;
-            if(line == "Quit!") {
-                return 0;
-            }
-            else {
-                newX = stoi(line);
-            }
-
-            cout << "\nEnter a new Y-coordinate: ";
-            cin >> line;
-            if(line == "Quit!") {
-                return 0;
-            }
-            else {
-                newY = stoi(line);
-            }
-
-            cout << "\nEnter a new Health amount: ";
-            cin >> line;
-            if(line == "Quit!") {
-                return 0;
-            }
-            else {
-                newHealth = stoi(line);
-            }
-
-            cout << "\n";
-
-            players[count-1].role = newRole;
-            players[count-1].x = newX;
-            players[count-1].y = newY;
-            players[count-1].health = newHealth;
-        }
-        else if(count == 3) {
-            cout << "No players with that name were found.\n";
-        }
-    }
-
-    print(players);
-*/
 
     print(players);
 
@@ -143,28 +72,6 @@ int main()
         nBytes = strlen(line) + 1;
         sendto(clientSocket, line, nBytes, 0, (struct sockaddr *)&ServerAddr, addr_size);
     }
-
-
-/*
-        string text;
-
-        text = "Name: " + it.name + "\nRole: " + (string)it.role 
-                + "\nCoordinates: (" + it.x + "," + it.y + ")"
-                + "\nHealth: " + it.health; 
-
-        nBytes = sizeof(text) + 1;
-        sendto(clientSocket, input_buffer, nBytes, 0, (struct sockaddr *)&ServerAddr, addr_size);
-        }
-    do
-    {
-        cout << "Type a sentence to send to the server: ";
-        cin.getline(input_buffer, 1023, '\n');
-        nBytes = strlen(input_buffer) + 1;
-        sendto(clientSocket, input_buffer, nBytes, 0,
-                (struct sockaddr *)&ServerAddr, addr_size);
-    } while (strncmp(input_buffer, "Quit", strlen(input_buffer) -1) != -0);
-    return 0;
-    */
    return 0;
 }
 
