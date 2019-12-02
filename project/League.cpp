@@ -316,26 +316,70 @@ void *receiveMessage(void *ptr) // Server Thread
     socklen_t addr_size = sizeof clientAddr;
 
     // ToDo: Create a loop and parse the received message
-    do {
-        
-    //Update
-    // ToDo: For Update, check if the IP is in the vector, if not add the player to the vector.
-        bool exists = false;
-        for(auto it:gamers) {
-            if(it->IP == )
-        }
-    //       otherwise,
+    /*char str[] = "Update,192.168.1.117,Name,0,0,0,0";
+    char * pch;
+    printf("Splitting string \"%s\" into tokens:\n",str);
+    pch = strtok(ptr,",");
+    pch = strtok(NULL,",");
 
+    while(pch != NULL) {
+        printf("%s\n",pch);
+        pch = strtok(NULL,",");
+    }*/
+    
+    do {
+        char *messageType = strtok(ptr,",");
+        char *ip = strtok(NULL,",");
+        char *name = strtok(NULL,",");
+        char *role = strtok(NULL,",");
+        char *x = strtok(NULL,",");
+        char *y = strtok(NULL,",");
+        char *health = strtok(NULL,",");
+        // Update message syntax: Update, IP, Name, Role, newX, newY, NewHealth
+    //Update
+        
+        if(messageType == "Update") {
+            bool found = false;
+            for(auto it:gamers) {
+                if(it->IP == ip) {
+                found = true;
+                    it->x = x;
+                    it->y = y;
+                }
+            }
+    // ToDo: For Update, check if the IP is in the vector, if not add the player to the vector.
+            if(!found) {
+                character newChar = new character(ip, (int)role, name, (int)x, (int)y, (int)health);
+                gamers.push_back(newChar);
+            }
+    //       otherwise,
+        }
+        // Hit message syntax: Hit, IP
     //Hit
     // ToDo: If the hit message is for you, reduce your character's health by 5 points.
+        else if(messageType == "Hit") {
+            if(ip == My_IP) {
+                myCharacter->health -= 5;
     //      If your health reduces to 0 or less, notify main thread with a flag so the main thread will broadcast
     //      QuitGame message to other players
-
+                if(myCharacter->health <= 0) {
+                    send_message(QuitGame);
+                }
+            }
+        }
+        // QuitGame message syntax: Quit
     //QuitGame
     // ToDo:
     // 1. Use a for loop to find the player who wants to exit the game.
-    // 2. Remove it from gamers vector
-    } while(strncmp(buffer, "Quit", strlen(buffer) - 1) != 0);
+    // 2. Remove it from gamers vector        
+        else if(messageType == "QuitGame") {
+            for(int i = 0; i < gamers.size(); ++i) {
+                if(strncmp(gamers[i]->IP, character->IP) == 0) {
+                    gamers->remove(i);
+                }
+            }
+        }
+    } while(strncpm(buffer, "Quit", strlen(buffer) - 1) != 0);
 }
 
 void send_message(ActionType action)
@@ -623,7 +667,7 @@ int event_thread(void *arg)
 }
 
 int main(int argc, char **argv)
-{
+{ 
     // variables
     char name_string[100] = {0};
     char temp_string[255] = {0}; // Maximum length of a string
