@@ -349,7 +349,7 @@ void *receiveMessage(void *ptr) // Server Thread
             }
     // ToDo: For Update, check if the IP is in the vector, if not add the player to the vector.
             if(!found) {
-                character newChar = new character(ip, (int)role, name, (int)x, (int)y, (int)health);
+                character newChar = character(ip, (int)role, name, (int)x, (int)y, (int)health);
                 gamers.push_back(newChar);
             }
     //       otherwise,
@@ -375,7 +375,7 @@ void *receiveMessage(void *ptr) // Server Thread
         else if(messageType == "QuitGame") {
             for(int i = 0; i < gamers.size(); ++i) {
                 if(strncmp(gamers[i]->IP, character->IP) == 0) {
-                    gamers->remove(i);
+                    ;
                 }
             }
         }
