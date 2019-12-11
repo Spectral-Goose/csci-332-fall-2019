@@ -294,92 +294,94 @@ int init()
     
     ServerAddr.sin_addr.s_addr = inet_addr(broadcastAddress);
     addr_size = sizeof(ServerAddr);
-    
-
-    // ToDo: Get my computer's lan state
-
     return 0;
 }
 
 void *receiveMessage(void *ptr) // Server Thread
 {
-    // ToDo: Initialize a server socket
-    int udpSocket;
-    int clientAddr;
+    int udpSocket, nBytes;
+    struct sockaddr_in ServerAddr, ClientAddr;
+    char *ClientIP;
 
     udpSocket = socket(PF_INET, SOCK_DGRAM, 0);
     ServerAddr.sin_family = AF_INET;
-    ServerAddr.sin_port = listeningPort;
-    ServerAddr.sin_addr.s_addr = INADDR_ANY;
+    ServerAddr.sin_port = htons(listeningPort);
+    ServerAddr.sin_addr.s_addr = inet_addr(broadcastAddress);
     memset(ServerAddr.sin_zero, '\0', sizeof ServerAddr.sin_zero);
     bind(udpSocket, (struct sockaddr *)&ServerAddr, sizeof(ServerAddr));
-    socklen_t addr_size = sizeof clientAddr;
+    socklen_t addr_size = sizeof ClientAddr;
 
-    // ToDo: Create a loop and parse the received message
-    /*char str[] = "Update,192.168.1.117,Name,0,0,0,0";
-    char * pch;
-    printf("Splitting string \"%s\" into tokens:\n",str);
-    pch = strtok(ptr,",");
-    pch = strtok(NULL,",");
-
-    while(pch != NULL) {
-        printf("%s\n",pch);
-        pch = strtok(NULL,",");
-    }*/
-    
     do {
-        char *messageType = strtok(ptr,",");
-        char *ip = strtok(NULL,",");
-        char *name = strtok(NULL,",");
-        char *role = strtok(NULL,",");
-        char *x = strtok(NULL,",");
-        char *y = strtok(NULL,",");
-        char *health = strtok(NULL,",");
-        // Update message syntax: Update, IP, Name, Role, newX, newY, NewHealth
-    //Update
+        nBytes = recvfrom(udpSocket, input_buffer, 1024, 0, (struct sockaddr *)&ClientAddr, &addr_size);
+        ClientIP = inet_ntoa(ClientAddr.sin_addr);
+
+        vector<char *> tokens;
+        char *init = strtok(input_buffer,",");
         
-        if(messageType == "Update") {
+        while(init != NULL) {
+            tokens.push_back(init);
+            init = strtok(NULL,",");
+        }
+
+    //Update
+        if(strncmp(tokens[0], "Update", sizeof(tokens[0])) == 0) {
             bool found = false;
-            for(auto it:gamers) {
-                if(it->IP == ip) {
-                found = true;
-                    it->x = x;
-                    it->y = y;
+            for(auto it = gamers.begin(); it != gamers.end(); it++) {
+                if(strncmp((*it)->IP, tokens[1], sizeof(tokens[1])) == 0) {
+                    found = true;
+                    (*it)->x = stoi(tokens[4]);
+                    (*it)->y = stoi(tokens[5]);
+                    (*it)->health = stoi(tokens[6]);
+                    (*it)->update();
+                    break;
                 }
             }
-    // ToDo: For Update, check if the IP is in the vector, if not add the player to the vector.
             if(!found) {
-                character newChar = character(ip, (int)role, name, (int)x, (int)y, (int)health);
+                character *newChar;
+                if(strncmp(tokens[1], myCharacter->IP, sizeof(tokens[1])) != 0) {
+                    newChar = new character(renderer, tokens[1], stoi(tokens[3])
+                            , tokens[2], stoi(tokens[4]), stoi(tokens[5]), stoi(tokens[6]));
+                }
+                else {
+                    newChar = myCharacter;
+                }
+                pthread_mutex_lock(&vector_lock);
                 gamers.push_back(newChar);
+                pthread_mutex_unlock(&vector_lock);
+                newChar->update();
             }
     //       otherwise,
         }
         // Hit message syntax: Hit, IP
     //Hit
-    // ToDo: If the hit message is for you, reduce your character's health by 5 points.
-        else if(messageType == "Hit") {
-            if(ip == My_IP) {
+        else if(strncmp(tokens[0], "Hit", sizeof(tokens[0])) == 0) {
+            cout << tokens[1] << My_IP << "\n";
+            if(strncmp(tokens[1], My_IP, strlen(My_IP)) == 0) {
+                cout << "reducing";
                 myCharacter->health -= 5;
     //      If your health reduces to 0 or less, notify main thread with a flag so the main thread will broadcast
     //      QuitGame message to other players
                 if(myCharacter->health <= 0) {
-                    send_message(QuitGame);
+                    quit = true;
+                    break;
                 }
+            }
+            else {
+                cout << myCharacter->IP << ", " << tokens[1] << "\n";
             }
         }
         // QuitGame message syntax: Quit
-    //QuitGame
-    // ToDo:
-    // 1. Use a for loop to find the player who wants to exit the game.
-    // 2. Remove it from gamers vector        
-        else if(messageType == "QuitGame") {
+    //QuitGame      
+        else if(strncmp(tokens[0], "QuitGame", sizeof(tokens[0])) == 0) {
             for(int i = 0; i < gamers.size(); ++i) {
-                if(strncmp(gamers[i]->IP, character->IP) == 0) {
-                    ;
+                if(strncmp(gamers[i]->IP, ClientIP, strlen(ClientIP)) == 0) {
+                    pthread_mutex_lock(&vector_lock);
+                    gamers.erase(gamers.begin() + i, (gamers.begin() + i + 1));
+                    pthread_mutex_unlock(&vector_lock);
                 }
             }
         }
-    } while(strncpm(buffer, "Quit", strlen(buffer) - 1) != 0);
+    } while(!quit);
 }
 
 void send_message(ActionType action)
@@ -390,23 +392,16 @@ void send_message(ActionType action)
     switch (action)
     {
     case Hit:
-        // ToDo:
-        // Send a Hit message and player IP
         
         sprintf(buffer, "Hit, %s", gamers[playerHitIndex]->IP);
-        
         break;
     case Update:
-        // ToDo:
-        // 1. Send a Update message with IP, name, Role, location and health
 
         sprintf(buffer, "Update,%s,%s,%d,%d,%d,%d", myCharacter->IP, myCharacter->name, myCharacter->role,
             myCharacter->x, myCharacter->y, myCharacter->health);
 
         break;
     case QuitGame:
-        // ToDo:
-        // Send a Quit message and player IP
 
         sprintf(buffer, "Quit");
 
@@ -416,17 +411,14 @@ void send_message(ActionType action)
     }
     if (Do_Actions)
     {
-        // ToDo:
         nBytes = sizeof(buffer) + 1;
 
         sendto(clientSocket, buffer, nBytes, 0, 
-        (struct sockaddr *)&ServerAddr, addr_size);
+                (struct sockaddr *)&ServerAddr, addr_size);
     }
 }
 
 bool checkOverlap(int x1, int y1, int x2, int y2) {
-    // Hitbox  tl = (x1,y1), tr = (x1+30,y1), bl = (x1,y1-30), br = (x1+30,y1)
-    // Charbox tl = (x2,y2), tr = (x2+70,y2), bl = (x2,y2-70), br = (x2+70,y2)
     int hbleft = x1;
     int hbright = x1 + 30;
     int hbtop = y1;
@@ -478,7 +470,7 @@ int event_thread(void *arg)
                 quit = true;
                 action = QuitGame;
                 break;
-            case SDL_KEYDOWN:
+            case SDL_KEYUP:
                 switch (event.key.keysym.sym)
                 {
                 case SDLK_a:
@@ -486,11 +478,7 @@ int event_thread(void *arg)
                     hx = myCharacter->x - 30;
                     hy = myCharacter->y + 20;
 
-                    // ToDo:
-                    // 1. go Through every element in the gamers vector and see if any player at the left hand side
-                    // 2. If there is a player
-                    // 3. No, ignore it
-                    // 4. Yes, send hit to the player
+                    pthread_mutex_lock(&vector_lock);
                     for(int i = 0; i < gamers.size(); i++) {
                         action = Hit;
                         if(checkOverlap(hx, hy, gamers[i]->x, gamers[i]->y)) {
@@ -498,17 +486,14 @@ int event_thread(void *arg)
                             send_message(action);
                         }
                     }
+                    pthread_mutex_unlock(&vector_lock);
+                    action = None;
                     break;
                 case SDLK_d:
                     // fight right
                     hx = myCharacter->x + 70;
                     hy = myCharacter->y + 20;
 
-                    // ToDo:
-                    // 1. go Through every element in the gamers vector and see if any player at the right hand side
-                    // 2. If there is a player, set proper action
-                    // 3. No, ignore it
-                    // 4. Yes, send hit to the player
                     for(int i = 0; i < gamers.size(); i++) {
                         action = Hit;
                         if(checkOverlap(hx, hy, gamers[i]->x, gamers[i]->y)) {
@@ -516,17 +501,13 @@ int event_thread(void *arg)
                             send_message(action);
                         }
                     }
+                    action = None;
                     break;
                 case SDLK_w:
                     // fight up
                     hx = myCharacter->x + 20;
                     hy = myCharacter->y - 30;
 
-                    // ToDo:
-                    // 1. go Through every element in the gamers vector and see if any player at the right hand side
-                    // 2. If there is a player, set proper action
-                    // 3. No, ignore it
-                    // 4. Yes, send hit to the player
                     for(int i = 0; i < gamers.size(); i++) {
                         action = Hit;
                         if(checkOverlap(hx, hy, gamers[i]->x, gamers[i]->y)) {
@@ -534,17 +515,13 @@ int event_thread(void *arg)
                             send_message(action);
                         }
                     }
+                    action = None;
                     break;
                 case SDLK_x:
                     //fight down
                     hx = myCharacter->x + 20;
                     hy = myCharacter->y + 70;
 
-                    // ToDo:
-                    // 1. go Through every element in the gamers vector and see if any player at the right hand side
-                    // 2. If there is a player, set proper action
-                    // 3. No, ignore it
-                    // 4. Yes, send hit to the player
                     for(int i = 0; i < gamers.size(); i++) {
                         action = Hit;
                         if(checkOverlap(hx, hy, gamers[i]->x, gamers[i]->y)) {
@@ -552,17 +529,13 @@ int event_thread(void *arg)
                             send_message(action);
                         }
                     }
+                    action = None;
                     break;
                 case SDLK_q:
                     // fight upper left
                     hx = myCharacter->x - 30;
                     hy = myCharacter->y - 30;
 
-                    // ToDo:
-                    // 1. go Through every element in the gamers vector and see if any player at the right hand side
-                    // 2. If there is a player, set proper action
-                    // 3. No, ignore it
-                    // 4. Yes, send hit to the player
                     for(int i = 0; i < gamers.size(); i++) {
                         action = Hit;
                         if(checkOverlap(hx, hy, gamers[i]->x, gamers[i]->y)) {
@@ -570,17 +543,13 @@ int event_thread(void *arg)
                             send_message(action);
                         }
                     }
+                    action = None;
                     break;
                 case SDLK_e:
                     //fight upper right
                     hx = myCharacter->x + 70;
                     hy = myCharacter->y - 30;
 
-                    // ToDo:
-                    // 1. go Through every element in the gamers vector and see if any player at the right hand side
-                    // 2. If there is a player, set proper action
-                    // 3. No, ignore it
-                    // 4. Yes, send hit to the player
                     for(int i = 0; i < gamers.size(); i++) {
                         action = Hit;
                         if(checkOverlap(hx, hy, gamers[i]->x, gamers[i]->y)) {
@@ -588,34 +557,28 @@ int event_thread(void *arg)
                             send_message(action);
                         }
                     }
+                    action = None;
                     break;
                 case SDLK_z:
                     // fight lower left
                     hx = myCharacter->x - 30;
                     hy = myCharacter->y + 70;
-                    // ToDo:
-                    // 1. go Through every element in the gamers vector and see if any player at the right hand side
-                    // 2. If there is a player, set proper action
-                    // 3. No, ignore it
-                    // 4. Yes, send hit to the player
+
                     for(int i = 0; i < gamers.size(); i++) {
                         action = Hit;
                         if(checkOverlap(hx, hy, gamers[i]->x, gamers[i]->y)) {
+                            cout << "hitplayrer\n";
                             playerHitIndex = i;
                             send_message(action);
                         }
                     }
+                    action = None;
                     break;
                 case SDLK_c:
                     // fight lower right
                     hx = myCharacter->x + 70;
                     hy = myCharacter->y + 70;
 
-                    // ToDo:
-                    // 1. go Through every element in the gamers vector and see if any player at the right hand side
-                    // 2. If there is a player, set proper action
-                    // 3. No, ignore it
-                    // 4. Yes, send hit to the player
                     for(int i = 0; i < gamers.size(); i++) {
                         action = Hit;
                         if(checkOverlap(hx, hy, gamers[i]->x, gamers[i]->y)) {
@@ -623,17 +586,13 @@ int event_thread(void *arg)
                             send_message(action);
                         }
                     }
+                    action = None;
                     break;
                 case SDLK_s:
                     // fight overlapped
                     hx = myCharacter->x + 20;
                     hy = myCharacter->y + 20;
 
-                    // ToDo:
-                    // 1. go Through every element in the gamers vector and see if any player at the right hand side
-                    // 2. If there is a player, set proper action
-                    // 3. No, ignore it
-                    // 4. Yes, send hit to the player
                     for(int i = 0; i < gamers.size(); i++) {
                         action = Hit;
                         if(checkOverlap(hx, hy, gamers[i]->x, gamers[i]->y)) {
@@ -641,6 +600,7 @@ int event_thread(void *arg)
                             send_message(action);
                         }
                     }
+                    action = None;
                     break;
                 case SDLK_ESCAPE: // Quitting game
                     quit = true;
@@ -707,12 +667,12 @@ int main(int argc, char **argv)
 
         // For your debugging....
         // Uncomment the next two lines anc change the message you want to debug
-        // sprintf(temp_string, "x: %d, y: %d", myCharacter->get_x(), myCharacter->get_y());
-        // draw_text(renderer, 0, 0, temp_string, Black,alignLeft);
+         sprintf(temp_string, "x: %d, y: %d", myCharacter->get_x(), myCharacter->get_y());
+         draw_text(renderer, 0, 0, temp_string, Black,alignLeft);
         // sprintf(temp_string, "IP:%s Netmask:%s Broadcast:%s", IPAddress(), net_mask(), broadcastAddress());
         // draw_text(renderer, 0, 0, temp_string, Black, alignLeft);
         draw_text(renderer, 0, 0, received_msg, Black, alignLeft);
-        for (auto &p : gamers)
+        for (auto &p:gamers)
         {
             SDL_RenderCopy(renderer, p->image, NULL, &p->rect);            //Role image
             SDL_RenderCopy(renderer, p->textTexture, NULL, &p->text_rect); //Name of the player

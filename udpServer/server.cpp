@@ -12,6 +12,7 @@ int main()
     char buffer[1024];
     struct sockaddr_in ServerAddr, ClientAddr;
     char *ClientIP;
+    
 
 
     udpSocket = socket(PF_INET, SOCK_DGRAM, 0);
